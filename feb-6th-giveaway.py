@@ -21,10 +21,11 @@ from giveaway_form_capture import _giveaway_form
 def _get_subscribe_to_win_text() -> str:
     return """
     <h1 style="text-align:center;">
-    Subscribe for a chance to win the Rec-Day Party Pack!
+    Subscribe to The Cannabis Cult<br>
+    Enter for a chance to win the Rec-Day Party Pack!
     <h1>
     """
-    
+
 
 def _get_sponsors_text() -> str:
     return """
@@ -38,18 +39,18 @@ def _get_sponsors_text() -> str:
           <br>
     </h1>
     """
-    
+
 
 def _subscribe_disclaimer() -> str:
     return """
     <label>
-    By subscribing, you agree to the Cannabis Cult User Agreement and 
+    By subscribing, you agree to the Cannabis Cult User Agreement and
     Privacy Statement, and that you are at least 21 years old.
     <br>
     </label>
     """
-    
-    
+
+
 def _return_copywrite_text():
     return """
     <section>
@@ -58,11 +59,11 @@ def _return_copywrite_text():
     </div>
     </section>
     """
-    
+
 
 def giveaway_page():
     global HELPERS_PATH, DATA_PATH
-    
+
     def st_allow_markdown(html_str: str) -> None:
         """
         HTML string to st.markdown with unsafe_allow_html set to True
@@ -77,11 +78,20 @@ def giveaway_page():
 
         """
         st.markdown(html_str, unsafe_allow_html=True)
-        
+
     # add background to page
+    # Hide mainmenu and footer
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                div.block-container {padding-top:1rem; padding-bottom:0rem;}
+                footer {visibility: hidden;}
+                </style>
+                """
+    st_allow_markdown(hide_streamlit_style)
     GIVEAWAY_BG_PATH = Path(DATA_PATH, 'jpg', 'giveaway_bg.jpg')
     add_bg_from_local(GIVEAWAY_BG_PATH)
-    
+
     # subscribe to win text
     with st.container():
         e1, upper_col, e2 = st.columns([.25, 2, .25])
@@ -94,13 +104,12 @@ def giveaway_page():
             st_allow_markdown(_get_sponsors_text())
         with form_col:
             st.markdown(
-                '<div><span style="text-align: right;">', 
+                '<div><span style="text-align: right;">',
                 unsafe_allow_html=True
-                )
+            )
             _giveaway_form()
             st.markdown('</span></div><br><br><br>', unsafe_allow_html=True)
-        
-    
+
     # sponsor logo paths
     with st.container():
         VIVID_LOGO = Path(DATA_PATH, 'png', 'vivid_logo.png')
@@ -109,39 +118,47 @@ def giveaway_page():
         NATUREMED_URL = 'https://naturemedmo.com/ofallon/'
         RUBYGLASS_LOGO = Path(DATA_PATH, 'png', 'ruby_glass_circle.png')
         RUBYGLASS_URL = 'https://rubyglassco.com/'
+        HANDWRAPS_LOGO = Path(DATA_PATH, 'png', 'handwraps_logo.png')
+        HANDWRAPS_URL = 'https://handwrapsco.com/'
         CC_LOGO = Path(DATA_PATH, 'png', 'white_cc_logo.png')
-        CC_INSTA_URL = 'https://www.instagram.com/missouricannabisreviews' 
+        CC_INSTA_URL = 'https://www.instagram.com/missouricannabisreviews'
         col1, col2, col3 = st.columns([2, 2, 2,])
         with col1:
             st_allow_markdown(
                 _clickable_image_without_caption(VIVID_URL, VIVID_LOGO)
-                )
+            )
             st.markdown('<br><br><br>', unsafe_allow_html=True)
             st_allow_markdown(
-                _clickable_image_without_caption(NATUREMED_URL ,NATUREMED_LOGO)
-                )
+                _clickable_image_without_caption(NATUREMED_URL, NATUREMED_LOGO)
+            )
             st.markdown('<br><br><br>', unsafe_allow_html=True)
         with col2:
             st_allow_markdown(
+                _clickable_image_without_caption(HANDWRAPS_URL, HANDWRAPS_LOGO)
+            )
+            st.markdown('<br><br><br>', unsafe_allow_html=True)
+            st_allow_markdown(
                 _clickable_image_without_caption(CC_INSTA_URL, CC_LOGO)
-                )
+            )
             st.markdown('<br><br><br>', unsafe_allow_html=True)
         with col3:
             st_allow_markdown(
                 _clickable_image_without_caption(RUBYGLASS_URL, RUBYGLASS_LOGO)
-                )
+            )
             st.markdown('<br><br><br>', unsafe_allow_html=True)
-            
+
     st.markdown('<br><br><br><br><br><br>', unsafe_allow_html=True)
     # bottom of page copywrite
-    e1, bottom_col, e2 = st.columns([.5, 1, .5])
+    e1, bottom_col, e2 = st.columns([.5, 3, .5])
     with bottom_col:
-        st_allow_markdown(f'<footer style="text-align:center;">{_return_copywrite_text()}</footer>')
-    
-    
+        st_allow_markdown(
+            f"""
+            <label style="text-align:center;">
+            {_return_copywrite_text()}
 
-    
-                
+            """
+        )
+
 
 if __name__ == '__main__':
     st.set_page_config(
