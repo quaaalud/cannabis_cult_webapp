@@ -30,12 +30,13 @@ def _get_subscribe_to_win_text() -> str:
 def _get_sponsors_text() -> str:
     return """
     <h1 style="text-align:left;">
-        Featuring art by <span style="color:#e74c3c;">Ruby Pearl Co.
+        Featuring art by <span style="color:#c52138;">Ruby Pearl Co.
         </span><br>
         Sponsored by:<br>
-          <span style="color:#f39c12">Vivid Cannabis</span><br>
-          <span style="color:#e74c3c">NatureMed Dispensary</span><br>
-          <span style="color:#f39c12">Handwraps STL</span><br>
+          <span style="color:#ec5328">Vivid Cannabis</span><br>
+          <span style="color:#0a7840">NatureMed </span><br>
+          <span style="color:#ecb21f">Dispensary</span><br>
+          <span style="color:#e2c36a">Handwraps STL</span><br>
           <br>
     </h1>
     """
