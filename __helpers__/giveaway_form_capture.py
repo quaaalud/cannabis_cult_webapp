@@ -6,11 +6,13 @@ import regex as re
 from datetime import date
 from pandas import Timestamp
 from pathlib import Path
+import sys
 
-
+HELPERS_DIR = Path(__file__).parent
+sys.path.append(str(HELPERS_DIR))
 ENTRIES_GS = '1M1npq3ziMhY5e-0RxzG6Z4dhk1zPkQqAE5RW5okdehA', '828187799'
 DOCS_URL = f'https://docs.google.com/spreadsheets/d/{ENTRIES_GS[0]}/export?format=csv&gid={ENTRIES_GS[1]}'
-ENTRIES_DIR = Path(Path(__file__).parent, 'entries')
+ENTRIES_DIR = Path(HELPERS_DIR, 'entries')
 
 
 def _check_name_is_ascii(name: str) -> str:
@@ -151,7 +153,7 @@ def _giveaway_form():
             checkbox_val = st.checkbox(label='21 +', label_visibility='hidden')
             st.markdown(_subscribe_disclaimer(), unsafe_allow_html=True)
             st.markdown('<br>', unsafe_allow_html=True)
-            submitted = st.form_submit_button("Submit")
+            submitted = st.form_submit_button("Submit")            
         if submitted:
             main_block.empty()
             if checkbox_val and _confirm_email_is_valid(email_add):

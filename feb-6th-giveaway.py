@@ -9,13 +9,14 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-HELPERS_PATH = Path(Path(__file__).parent, '__helpers__')
+HELPERS_PATH = Path(Path(__file__).parents[0], '__helpers__')
 DATA_PATH = Path(HELPERS_PATH, '.data')
 sys.path.append(str(HELPERS_PATH))
 
 from __add_background_from_local__ import add_bg_from_local
 from local_image_to_html_with_href import _clickable_image_without_caption
 from giveaway_form_capture import _giveaway_form
+import get_privacy_or_tandc 
 
 
 def _get_subscribe_to_win_text() -> str:
@@ -36,7 +37,7 @@ def _get_sponsors_text() -> str:
           <span style="color:#ec5328">Vivid Cannabis</span><br>
           <span style="color:#0a7840">NatureMed </span><br>
           <span style="color:#ecb21f">Dispensary</span><br>
-          <span style="color:#e2c36a">Handwraps STL</span><br>
+          <span style="color:#e2c36a">Handwraps Paper Co.</span><br>
           <br>
     </h1>
     """
@@ -85,6 +86,7 @@ def giveaway_page():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
+                ul {display: none;}
                 div.block-container {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
@@ -150,7 +152,7 @@ def giveaway_page():
 
     st.markdown('<br><br><br><br><br><br>', unsafe_allow_html=True)
     # bottom of page copywrite
-    e1, bottom_col, e2 = st.columns([.5, 3, .5])
+    e1, bottom_col, pcol, tcol, e2 = st.columns([.5, 3, 1, 1, .5])
     with bottom_col:
         st_allow_markdown(
             f"""
@@ -159,7 +161,11 @@ def giveaway_page():
 
             """
         )
-
+    with pcol:
+        get_privacy_or_tandc._return_privacy_link()
+    with tcol:
+        get_privacy_or_tandc._return_terms_of_use_link()
+        
 
 if __name__ == '__main__':
     st.set_page_config(

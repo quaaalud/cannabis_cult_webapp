@@ -30,6 +30,7 @@ def main():
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
+                ul {display: none;}
                 div.block-container {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
