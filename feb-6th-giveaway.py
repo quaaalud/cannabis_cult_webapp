@@ -16,7 +16,21 @@ sys.path.append(str(HELPERS_PATH))
 from __add_background_from_local__ import add_bg_from_local
 from local_image_to_html_with_href import _clickable_image_without_caption
 from giveaway_form_capture import _giveaway_form
-import get_privacy_or_tandc 
+import get_privacy_or_tandc
+
+
+def _get_disclaimer_text() -> str:
+    return """
+    <p style="text-align:center;">
+    <small><small><small>
+    Potential customers should be reminded that the possession, distribution,
+    and cultivation of cannabis is still prohibited under US federal law.
+    Medical decisions should not be based on advertising.
+    Consult a physician of the benefits and risks of of particular medical
+    marijuana products.
+    </small></small></small>
+    </p>
+    """
 
 
 def _get_subscribe_to_win_text() -> str:
@@ -24,7 +38,7 @@ def _get_subscribe_to_win_text() -> str:
     <h1 style="text-align:center;">
     Subscribe to The Cannabis Cult<br>
     Enter for a chance to win the Rec-Day Party Pack!
-    <h1>
+    </h1>
     """
 
 
@@ -111,6 +125,7 @@ def giveaway_page():
                 unsafe_allow_html=True
             )
             _giveaway_form()
+            st_allow_markdown(_get_disclaimer_text())
             st.markdown('</span></div><br><br><br>', unsafe_allow_html=True)
 
     # sponsor logo paths
@@ -165,7 +180,7 @@ def giveaway_page():
         get_privacy_or_tandc._return_privacy_link()
     with tcol:
         get_privacy_or_tandc._return_terms_of_use_link()
-        
+
 
 if __name__ == '__main__':
     st.set_page_config(
