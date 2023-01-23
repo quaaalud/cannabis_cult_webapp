@@ -170,7 +170,7 @@ def giveaway_page():
     # social medial links for The Cannabis Cult
     with st.container():
         __sm_links__._display_sm_links()
-    e1, bottom_col, e2, pcol, tcol, e3 = st.columns([.5, 3, .25, 1, 1, .5])
+    e1, bottom_col, e2, pcol, tcol, e3 = st.columns([.5, 3, .25,  1, 1, .5])
     # bottom of page copywrite
     with bottom_col:
         st_allow_markdown(
