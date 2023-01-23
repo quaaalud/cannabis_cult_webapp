@@ -11,25 +11,26 @@ from pathlib import Path
 
 HELPERS_DIR = Path(__file__).parents[0]
 
+
 @st.cache
 def _get_html_file(file_name: str) -> str:
     global HELPERS_DIR
     html_doc = Path(HELPERS_DIR, file_name)
     with open(html_doc, 'r') as file:
         return ''.join(file.readlines())
-    
-    
+
+
 def _streamlit_display_html(html_str: str) -> st.markdown:
     return st.markdown(html_str, unsafe_allow_html=True)
 
 
 def _display_privacy_policy():
-    _streamlit_display_html(_get_html_file('privacy_policy.html')) 
-    
+    _streamlit_display_html(_get_html_file('privacy_policy.html'))
+
 
 def _display_tandc_policy():
-    _streamlit_display_html(_get_html_file('terms_and_conditions.html')) 
-    
+    _streamlit_display_html(_get_html_file('terms_and_conditions.html'))
+
 
 def return_main_link():
     terms_link = """
@@ -42,9 +43,8 @@ def return_main_link():
     <div>
     """
     _streamlit_display_html(terms_link)
-    
-    
-    
+
+
 def _return_terms_of_use_link():
     terms_link = """
     <div>
@@ -56,8 +56,8 @@ def _return_terms_of_use_link():
     <div>
     """
     _streamlit_display_html(terms_link)
-    
-    
+
+
 def _return_privacy_link():
     privacy_link = """
     <div>
@@ -69,7 +69,7 @@ def _return_privacy_link():
     <div>
     """
     _streamlit_display_html(privacy_link)
-    
-    
+
+
 if __name__ == '__main__':
     pass
