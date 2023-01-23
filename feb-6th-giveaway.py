@@ -17,6 +17,7 @@ from __add_background_from_local__ import add_bg_from_local
 from local_image_to_html_with_href import _clickable_image_without_caption
 from giveaway_form_capture import _giveaway_form
 import get_privacy_or_tandc
+import __sm_links__
 
 
 def _get_disclaimer_text() -> str:
@@ -166,8 +167,11 @@ def giveaway_page():
             st.markdown('<br><br><br>', unsafe_allow_html=True)
 
     st.markdown('<br><br><br><br><br><br>', unsafe_allow_html=True)
+    # social medial links for The Cannabis Cult
+    with st.container():
+        __sm_links__._display_sm_links()
+    e1, bottom_col, e2, pcol, tcol, e3 = st.columns([.5, 3, .25, 1, 1, .5])
     # bottom of page copywrite
-    e1, bottom_col, pcol, tcol, e2 = st.columns([.5, 3, 1, 1, .5])
     with bottom_col:
         st_allow_markdown(
             f"""
