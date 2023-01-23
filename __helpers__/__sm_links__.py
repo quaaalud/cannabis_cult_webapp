@@ -17,20 +17,20 @@ from __get_image_to_display__ import _img_to_bytes
 
 def _get_all_sm_logos() -> list:
     sm_logo_dir = Path(
-        Path(__file__).parents[1],
+        Path(__file__).parent,
         '.data',
-        '.database',
-        'sm_logos'
+        'social_media_logos'
     )
     return [file for file in sm_logo_dir.iterdir() if file.is_file()]
 
 
 def _return_sm_links_dict() -> dict:
     return {
-        'Facebook': 'https://www.facebook.com/thesocialoutfitus',
-        'Instagram': 'https://www.instagram.com/thesocialoutfitus',
-        'Twitter': 'https://twitter.com/socialoutfitUS',
+        'Facebook': 'https://www.facebook.com/100089202138069',
+        'Instagram': 'http://www.instagram.com/missouricannabisreviews/',
+        'Twitter': 'https://twitter.com/TheCannabisCvlt',
     }
+
 
 @st.cache(allow_output_mutation=True)
 def _get_sm_logo_and_link() -> dict:
@@ -42,7 +42,7 @@ def _get_sm_logo_and_link() -> dict:
     return logos_dict
 
 
-def sm_logo_link_to_html(web_path: str, 
+def sm_logo_link_to_html(web_path: str,
                          img_path: str) -> str:
     try:
         img_html = f"""
@@ -89,7 +89,7 @@ def _display_sm_links() -> None:
         <b>Vist our social media pages and connect with us today</b>
         </p>"""
         st.markdown(visit_txt, unsafe_allow_html=True)
-            
-            
+
+
 if __name__ == '__main__':
     print(_get_sm_logo_and_link())
