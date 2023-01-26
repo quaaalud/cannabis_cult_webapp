@@ -63,7 +63,6 @@ def mj_app_display() -> None:
         asyncio.run(__image_carousel__._return_image_carousel()) 
     
 
-
 if __name__ == '__main__':
     st.set_page_config(
         layout='wide',
