@@ -30,5 +30,6 @@ def _remove_email_from_entries(email_str: str,
         removed_data = data.loc[~
             (data['email'].str.lower()).str.contains(email_str.lower())
             ]
-        removed_data.to_csv(str(entries_wbook_path), index=False)
-      
+        export_data = removed_data.copy().applymap(str)
+        export_data.to_csv(str(entries_wbook_path), index=False)
+
