@@ -42,7 +42,7 @@ def are_you_21() -> bool:
         no_button = col2.button('No')
         if no_button:
             return 'Not 21'
-        elif yes_button:
+        if yes_button:
             return True
 
 
