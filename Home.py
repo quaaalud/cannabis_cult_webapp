@@ -14,41 +14,39 @@ MAIN_DIR = Path(__file__).parent
 sys.path.append(str(MAIN_DIR))
 sys.path.append(str(Path(MAIN_DIR, '__helpers__')))
 
-import are_you_21
+
 from __return_cc_title__ import _return_cc_title
-import __get_reviews_insta__
+import asyncio
 import daily_deals
+import __image_carousel__
+import are_you_21
 
 FONT_FAMILY = 'font-family:"Helvetica Neue", Arial, Helvetica, Verdana,'
 
+
 def mj_app_display() -> None:
-    """Display the Cannabis Cult Web App."""
+    """Display the Cannabis Cult Web App."""   
     # Hide mainmenu and footer
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
-                ul {display: none;}
-                div.block-container {padding-top:1rem; padding-bottom:0rem;}
+                div.block-container 
+                {padding-top:1rem; padding-bottom:0rem;}
                 footer {visibility: hidden;}
                 </style>
                 """
+                
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     st.markdown(_return_cc_title(), unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([2, 2, 2])
-    col1.write('Image Placeholder')
-    col2.markdown(
-        __get_reviews_insta__._get_insta_html(),
-        unsafe_allow_html=True
-    )
-    col3.write('Image Placeholder')
+    carousel_container = st.container()
     st.markdown('<div><br><br></div>', unsafe_allow_html=True)
     daily_deals.display_daily_deals()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     st.markdown(
         """
         <div style="text-align: center;">
-        <h1>Map Placeholder</h1>
+        <h1>Map or Highlighted Content Placeholder</h1>
         </div>""",
         unsafe_allow_html=True,
     )
@@ -61,6 +59,9 @@ def mj_app_display() -> None:
         unsafe_allow_html=True,
     )
     st.markdown('<div><br></div>', unsafe_allow_html=True)
+    with carousel_container:
+        asyncio.run(__image_carousel__._return_image_carousel()) 
+    
 
 
 if __name__ == '__main__':
@@ -70,5 +71,5 @@ if __name__ == '__main__':
         menu_items=None,
         initial_sidebar_state='collapsed',
     )
-    if are_you_21.mj_app_age_check():
-        mj_app_display()
+    mj_app_display() 
+    
