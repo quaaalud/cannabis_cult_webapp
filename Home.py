@@ -28,6 +28,20 @@ import __sm_links__
 FONT_FAMILY = 'font-family:"Helvetica Neue", Arial, Helvetica, Verdana,'
 
 
+def _get_disclaimer_text() -> str:
+    return """
+    <p style="text-align:center;">
+    <small><small><small>
+    Potential customers should be reminded that the possession, distribution,
+    and cultivation of cannabis is still prohibited under US federal law.
+    Medical decisions should not be based on advertising.
+    Consult a physician of the benefits and risks of of particular medical
+    marijuana products.
+    </small></small></small>
+    </p>
+    """
+
+
 def mj_app_display() -> None:
     """Display the Cannabis Cult Web App."""
     # Hide mainmenu and footer
@@ -57,6 +71,7 @@ def mj_app_display() -> None:
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     with st.expander('Join our mailing list'):
         giveaway_form_capture._giveaway_form()
+        st.markdown(_get_disclaimer_text(), unsafe_allow_html=True)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     __sm_links__._display_sm_links()
     __add_pages_links__._display_pages_links()

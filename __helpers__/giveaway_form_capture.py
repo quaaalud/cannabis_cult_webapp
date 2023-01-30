@@ -115,8 +115,10 @@ def _add_new_entry_to_wbook(df: pd.DataFrame) -> pd.DataFrame:
 def _subscribe_disclaimer() -> str:
     return """
     <h4 style="text-align:left;">
-    By subscribing, you agree to the Cannabis Cult User Agreement and
-    Privacy Statement, and that you are at least 21 years old.
+    By subscribing, you agree to the Cannabis Cult
+    <a href="http://cannabiscult.co/Terms_of_Use">User Agreement</a> and
+    <a href="http://cannabiscult.co/Privacy_Policy">Privacy Statement</a>,
+    and that you are at least 21 years old.
     <br>
     </h4>
     """
@@ -179,7 +181,7 @@ def _giveaway_form():
                 main_block.subheader(
                     """
                     <h3 style="text-align: center;">
-                    You must be 21 years old &<br>
+                    You must be at least 21 years old &<br>
                     legal resident of Missouri or Illinois to Enter
                     """
                 )
