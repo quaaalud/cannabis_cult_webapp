@@ -150,10 +150,10 @@ def _giveaway_form():
                 placeholder='Zip Code',
                 label_visibility='collapsed',
             )
-            checkbox_val = st.checkbox(label='21 +', label_visibility='hidden')
+            checkbox_val = st.checkbox(label='I am at least 21 years old')
             st.markdown(_subscribe_disclaimer(), unsafe_allow_html=True)
             st.markdown('<br>', unsafe_allow_html=True)
-            submitted = st.form_submit_button("Submit")            
+            submitted = st.form_submit_button("Submit")
         if submitted:
             main_block.empty()
             if checkbox_val and _confirm_email_is_valid(email_add):

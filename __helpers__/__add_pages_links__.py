@@ -3,12 +3,12 @@
 
 import sys
 from pathlib import Path
+import streamlit as st
 
 sys.path.append(str(Path(__file__).parent))
 
-import streamlit as st
+HOME_PAGE = 'http://cannabiscult.co'
 
-HOME_PAGE = 'http://thesocialoutfitus.com'
 
 # @st.cache(allow_output_mutation=True)
 def _list_all_pages() -> dict:
@@ -22,20 +22,20 @@ def _list_all_pages() -> dict:
         if page.is_file():
             pages_dict[page.stem] = f'{HOME_PAGE}/{page.stem}'
     return pages_dict
-    
+
 
 def _return_pages_links_html(page_name:str, web_path:str) -> str:
     return f"""
-    <h4 style="text-align:center; color:gray"><u>
+    <h6 style="text-align:center; color:gray"><u>
     <a href='{web_path}' target='_self'>
     {page_name.title()}
     </u>
-    </h4>
+    </h6>
     """
-    
+
 def _convert_pages_dict_to_html(pages_dict: dict) -> list:
     return [
-        _return_pages_links_html(page_name, web_path) for 
+        _return_pages_links_html(page_name, web_path) for
         page_name, web_path in pages_dict.items()
         ]
 
@@ -60,7 +60,7 @@ def _display_pages_links():
                 <p style='text-align:center; color:gray;'> <br><br>
                 © 2023 All Rights Reserved
                 </p>
-                """, 
+                """,
                 unsafe_allow_html=True
                 )
 

@@ -83,7 +83,6 @@ def _display_sm_links() -> None:
             col3.markdown(sm_logo_link_to_html(sm_link, sm_logo),
                           unsafe_allow_html=True,
                           )
-        st.markdown('<div><br></div>', unsafe_allow_html=True)
 #    with st.container():
 #        visit_txt = """
 #        <p style='text-align:center; color:gray;'>
