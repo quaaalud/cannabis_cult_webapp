@@ -64,6 +64,7 @@ def return_image_from_path_and_resize(file_path: str) -> Image:
     img = img.resize((500, 500))
     return img
 
+
 def return_image_from_path_and_resize_medium(file_path: str) -> Image:
     """
     Take file path and returns PIL.Image for use in Streamlit App.
