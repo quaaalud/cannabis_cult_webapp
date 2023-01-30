@@ -32,10 +32,10 @@ def _get_all_col_values(df: pd.DataFrame) -> list:
 
 def _get_company_info_dict(vals_array: array) -> dict:
     return {
-        'Phone': vals_array[0][0],
+        'Contact': vals_array[0][0],
         'Address': vals_array[0][1],
-        '"Daily Deal"': vals_array[0][2],
-        'Promo Code': vals_array[0][3],
+        'Try This!': vals_array[0][2],
+        'Specials': vals_array[0][3],
         }
 
 
@@ -59,23 +59,6 @@ def display_daily_deals() -> None:
             lbl_str = f'{lbl}: {info}'
             lbl_list.append(lbl_str)
         if (i % 3) == 0:
-            col1.markdown(
-                f"""
-                <h2 style="text-align: center">
-                {co_name}
-                </h2>""",
-                unsafe_allow_html=True,
-                )
-            for lbl in lbl_list:
-                col1.markdown(
-                    f"""
-                    <div style="text-align: center">
-                    {lbl}
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                    )
-        elif (i % 3) == 1:
             col2.markdown(
                 f"""
                 <h2 style="text-align: center">
@@ -85,6 +68,23 @@ def display_daily_deals() -> None:
                 )
             for lbl in lbl_list:
                 col2.markdown(
+                    f"""
+                    <div style="text-align: center">
+                    {lbl}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                    )
+        elif (i % 3) == 1:
+            col1.markdown(
+                f"""
+                <h2 style="text-align: center">
+                {co_name}
+                </h2>""",
+                unsafe_allow_html=True,
+                )
+            for lbl in lbl_list:
+                col1.markdown(
                     f"""
                     <div style="text-align: center">
                     {lbl}
