@@ -157,7 +157,7 @@ def _return_image_selector(set_key=None) -> int:
 if __name__ == '__main__':
     st.set_page_config(
         layout='wide',
-        page_title='Cannabis Cult - Coming Soon',
+        page_title='Cannabis Cult',
         menu_items=None,
         initial_sidebar_state='collapsed',
     )
