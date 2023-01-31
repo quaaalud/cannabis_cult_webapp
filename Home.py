@@ -60,7 +60,7 @@ def mj_app_display() -> None:
         )
     add_bg_from_local(GIVEAWAY_BG_PATH)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    e1, logo_col, e2 = st.columns([4, 3.5, 3.25])
+    e1, logo_col, e2 = st.columns([4, 3, 4])
     with logo_col:
         _return_cc_title()
     daily_deals.display_daily_deals()
