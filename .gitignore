@@ -21,6 +21,7 @@ parts/
 sdist/
 var/
 wheels/
+.streamlit/
 Scripts/
 share/
 site/
