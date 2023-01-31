@@ -121,7 +121,7 @@ async def _display_selected_img(img) -> st.image:
         f"""
         <div
         style="display: flex; justify-content: center;
-        max-height:250px;">
+        max-height:300px;">
         <img style="text-align:center; width:auto";
         src="{img}">
         </div>
