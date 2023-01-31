@@ -1,0 +1,14 @@
+<div style="font-align:center;">
+<h2 style="color:red">
+Blog Title
+</h2>
+<br><br>
+<h4 style="color:black">
+This is a sample blog post<br>
+This is a sample blog post<br>
+This is a sample blog post<br>
+This is a sample blog post<br>
+This is a sample blog post<br>
+This is a sample blog post<br>
+</h4>
+</div>

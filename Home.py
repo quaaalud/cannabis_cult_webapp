@@ -18,6 +18,7 @@ sys.path.append(str(Path(MAIN_DIR, '__helpers__')))
 from __return_cc_title__ import _return_cc_title
 import asyncio
 import daily_deals
+import get_blog_pages
 import __image_carousel__
 import are_you_21
 import giveaway_form_capture
@@ -67,13 +68,7 @@ def mj_app_display() -> None:
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     carousel_container = st.container()
     st.markdown('<div><br><br></div>', unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="text-align: center;">
-        <h1>Map or Highlighted Content Placeholder</h1>
-        </div>""",
-        unsafe_allow_html=True,
-    )
+    get_blog_pages.display_blogs_as_tabs()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     with st.expander('Join our mailing list'):
         giveaway_form_capture._giveaway_form()
