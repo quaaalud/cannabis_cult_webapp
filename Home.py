@@ -56,7 +56,7 @@ def mj_app_display() -> None:
 
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    e1, logo_col, e2 = st.columns([1.5, 1, 1.5])
+    e1, logo_col, e2 = st.columns([2.5, 3, 2.5])
     with logo_col:
         _return_cc_title()
     daily_deals.display_daily_deals()

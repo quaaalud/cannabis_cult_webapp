@@ -12,5 +12,5 @@ import streamlit as st
 def _return_cc_title() -> str:
     from __get_image_to_display__ import return_image_from_path
     cc_logos_path = Path(Path(__file__).parent, '.data', 'cc_logos')
-    use_logo = Path(cc_logos_path, 'cc_cult_cowboy.png')
+    use_logo = Path(cc_logos_path, 'black_cc_logo.png')
     return st.image(return_image_from_path(str(use_logo)))
