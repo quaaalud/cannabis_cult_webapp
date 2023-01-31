@@ -23,6 +23,7 @@ import are_you_21
 import giveaway_form_capture
 import __add_pages_links__
 import __sm_links__
+from __add_background_from_local__ import add_bg_from_local
 
 
 FONT_FAMILY = 'font-family:"Helvetica Neue", Arial, Helvetica, Verdana,'
@@ -53,10 +54,13 @@ def mj_app_display() -> None:
                 footer {visibility: hidden;}
                 </style>
                 """
-
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    GIVEAWAY_BG_PATH = Path(
+        Path(__file__).parent, '__helpers__', '.data', 'jpg', 'giveaway_bg.jpg'
+        )
+    add_bg_from_local(GIVEAWAY_BG_PATH)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    e1, logo_col, e2 = st.columns([2.5, 3, 2.5])
+    e1, logo_col, e2 = st.columns([4, 3, 3])
     with logo_col:
         _return_cc_title()
     daily_deals.display_daily_deals()

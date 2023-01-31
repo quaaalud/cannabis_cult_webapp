@@ -13,6 +13,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from st_clickable_images import clickable_images
 from pathlib import Path
+from random import shuffle
 
 
 def _return_url_bytes_str(file_path: str):
@@ -75,6 +76,7 @@ async def _return_image_carousel(set_height=300) -> components:
             path="/home/dale/dale_working_folder/mj_app/lib/python3.11/site-packages/Streamlit-Image-Carousel/frontend/public"
             )
     all_png_list = _return_img_carousel_files()
+    shuffle(all_png_list)
     png_urls = _return_encoded_imgs_for_display(all_png_list)
     with display_block:
         selected_image = image_carousel_component(
