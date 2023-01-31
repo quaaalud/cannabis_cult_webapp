@@ -30,17 +30,18 @@ def _get_all_company_names(df: pd.DataFrame) -> pd.DataFrame:
 def _get_all_col_values(df: pd.DataFrame) -> list:
     return df.values
 
+
 def _get_company_info_dict(vals_array: array) -> dict:
     return {
         'Contact': vals_array[0][0],
         'Address': vals_array[0][1],
-        'Try This!': vals_array[0][2],
+        'Try This': vals_array[0][2],
         'Specials': vals_array[0][3],
         }
 
 
 def _get_deal_workbook_and_return_dict() -> dict:
-    deals_df =  get_gsheet.pandas_read_google_sheet()
+    deals_df = get_gsheet.pandas_read_google_sheet()
     co_names_list = _get_all_company_names(deals_df)
     deals_dict = {}
     for co in co_names_list:
@@ -70,7 +71,9 @@ def display_daily_deals() -> None:
                 col2.markdown(
                     f"""
                     <div style="text-align: center">
+                    <h4>
                     {lbl}
+                    </h4>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -87,7 +90,9 @@ def display_daily_deals() -> None:
                 col1.markdown(
                     f"""
                     <div style="text-align: center">
+                    <h4>
                     {lbl}
+                    </h4>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -104,7 +109,9 @@ def display_daily_deals() -> None:
                 col3.markdown(
                     f"""
                     <div style="text-align: center">
+                    <h4>
                     {lbl}
+                    </h4>
                     </div>
                     """,
                     unsafe_allow_html=True,
