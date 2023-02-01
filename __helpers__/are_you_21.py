@@ -38,14 +38,15 @@ def are_you_21() -> bool:
         col1, col2, col3 = st.columns([3, 2.5, 3])
         col2.write(display_txt)
         e1, col1, col2, e2 = st.columns([5, 1, 1, 5])
-        yes_button = col1.button('Yes')
-        no_button = col2.button('No')
+        yes_button = col1.button('Yes', key='YES-KEY')
+        no_button = col2.button('No', key='NO-KEY')
         if no_button:
-            return 'Not 21'
+            return False
         if yes_button:
             return True
 
 
+@st.experimental_singleton(experimental_allow_widgets=True)
 def mj_app_age_check() -> bool:
     """
     Confirm the user is over 21 and if so, proceeds to call display functions.
@@ -59,26 +60,27 @@ def mj_app_age_check() -> bool:
     main_block = st.empty()
     with main_block:
         age_result = are_you_21()
-    if age_result is None:
-        pass
-    elif age_result == 'Not 21':
-        main_block.empty()
-        head_block.subheader('Come back with someone over the age of 21')
-        time.sleep(30)
-        head_block.empty()
-        return False
-    else:
-        main_block.empty()
-        head_block.subheader('Welcome to the Cannabis Cult!')
-        time.sleep(2.5)
-        head_block.write('')
-        return True
+    while age_result is None:
+        if age_result is None:
+            continue
+        elif age_result is False:
+            main_block.empty()
+            head_block.subheader('Come back with someone over the age of 21')
+            time.sleep(30)
+            head_block.empty()
+            return False
+        else:
+            main_block.empty()
+            head_block.subheader('Welcome to the Cannabis Cult!')
+            time.sleep(2.5)
+            head_block.write('')
+            return True
 
 
 @st.cache
 def _cache_age_result(any_var):
     return any_var
-    
+
 
 if __name__ == '__main__':
     result = are_you_21()

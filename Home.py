@@ -7,24 +7,13 @@ Created on Sun Jan  1 18:31:44 2023
 """
 
 import streamlit as st
+import time
 import sys
 from pathlib import Path
 
 MAIN_DIR = Path(__file__).parent
 sys.path.append(str(MAIN_DIR))
 sys.path.append(str(Path(MAIN_DIR, '__helpers__')))
-
-
-from __return_cc_title__ import _return_cc_title
-import asyncio
-import daily_deals
-import get_blog_pages
-import __image_carousel__
-import are_you_21
-import giveaway_form_capture
-import __add_pages_links__
-import __sm_links__
-from __add_background_from_local__ import add_bg_from_local
 
 
 FONT_FAMILY = 'font-family:"Helvetica Neue", Arial, Helvetica, Verdana,'
@@ -46,6 +35,15 @@ def _get_disclaimer_text() -> str:
 
 def mj_app_display() -> None:
     """Display the Cannabis Cult Web App."""
+    from __return_cc_title__ import _return_cc_title
+    import asyncio
+    import daily_deals
+    import get_blog_pages
+    import __image_carousel__
+    import giveaway_form_capture
+    import __add_pages_links__
+    import __sm_links__
+    from __add_background_from_local__ import add_bg_from_local
     # Hide mainmenu and footer
     hide_streamlit_style = """
                 <style>
@@ -87,4 +85,24 @@ if __name__ == '__main__':
         menu_items=None,
         initial_sidebar_state='collapsed',
     )
-    mj_app_display()
+    import are_you_21
+    age_check = None
+    main_block = st.empty()
+    with main_block:
+        age_check_value = are_you_21.are_you_21()
+        while age_check is None:
+            if age_check_value is not None:
+                if age_check_value is True:
+                    main_block.empty()
+                    age_check = True
+                else:
+                    main_block.empty()
+                    main_block.write(
+                        'Come back when you are 21 year of age or older.'
+                        )
+                    time.sleep(30)
+                    main_block.empty()
+                    age_check = None
+    while age_check is True:
+        main_block.empty()
+        mj_app_display()
