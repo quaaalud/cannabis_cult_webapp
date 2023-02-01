@@ -124,6 +124,7 @@ def _subscribe_disclaimer() -> str:
     """
 
 
+@st.experimental_singleton(experimental_allow_widgets=True)
 def _giveaway_form():
     main_block = st.empty()
     with main_block:
@@ -133,29 +134,38 @@ def _giveaway_form():
                 max_chars=30,
                 placeholder='Your Name',
                 label_visibility='collapsed',
+                key='FORM-NAME',
             )
             email_add = st.text_input(
                 'Email',
                 max_chars=30,
                 placeholder='Email is Required',
                 label_visibility='collapsed',
+                key='FORM-EMAIL',
             )
             phone_num = st.text_input(
                 'Phone',
                 max_chars=14,
                 placeholder='Phone Number',
                 label_visibility='collapsed',
+                key='FORM-PHONE',
             )
             zip_code = st.text_input(
                 'Zip Code',
                 max_chars=7,
                 placeholder='Zip Code',
                 label_visibility='collapsed',
+                key='FORM-ZIP',
             )
-            checkbox_val = st.checkbox(label='I am at least 21 years old')
+            checkbox_val = st.checkbox(
+                label='I am at least 21 years old',
+                key='FORM-CHECKBOX',
+                )
             st.markdown(_subscribe_disclaimer(), unsafe_allow_html=True)
             st.markdown('<br>', unsafe_allow_html=True)
-            submitted = st.form_submit_button("Submit")
+            submitted = st.form_submit_button(
+                "Submit",
+                )
         if submitted:
             main_block.empty()
             if checkbox_val and _confirm_email_is_valid(email_add):
