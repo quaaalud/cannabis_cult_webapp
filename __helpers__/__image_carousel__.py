@@ -77,20 +77,25 @@ async def _return_image_carousel(set_height=300) -> components:
             )
     all_png_list = _return_img_carousel_files()
     png_urls = _return_encoded_imgs_for_display(all_png_list)
-    with display_block:
-        selected_image = image_carousel_component(
-            imageUrls=png_urls,
-            height=set_height
-            )
-    with main_block:
-        selected_index = _return_index_of_list_item(png_urls, selected_image)
-        if selected_image:
-            await _display_selected_img(selected_image)
-        else:
-            while True:
-                await _display_selected_img(png_urls[selected_index])
-                await sleep_async(4)
-                selected_index = (selected_index + 1) % len(png_urls)
+    try:
+        with display_block:
+            selected_image = image_carousel_component(
+                imageUrls=png_urls,
+                height=set_height
+                )
+        with main_block:
+            selected_index = _return_index_of_list_item(png_urls,
+                                                        selected_image
+                                                        )
+            if selected_image:
+                await _display_selected_img(selected_image)
+            else:
+                while True:
+                    await _display_selected_img(png_urls[selected_index])
+                    await sleep_async(4)
+                    selected_index = (selected_index + 1) % len(png_urls)
+    except st.errors.StreamlitAPIException:
+        pass
 
 
 def _get_indexed_list_dict(any_list: list) -> dict:

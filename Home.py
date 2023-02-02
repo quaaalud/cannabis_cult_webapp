@@ -59,7 +59,7 @@ def mj_app_display() -> None:
         )
     add_bg_from_local(GIVEAWAY_BG_PATH)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    e1, logo_col, e2 = st.columns([4, 3, 4])
+    e1, logo_col, e2 = st.columns([3, 3, 3])
     with logo_col:
         _return_cc_title()
     daily_deals.display_daily_deals()
@@ -86,23 +86,9 @@ if __name__ == '__main__':
         initial_sidebar_state='collapsed',
     )
     import are_you_21
-    age_check = None
-    main_block = st.empty()
-    with main_block:
-        age_check_value = are_you_21.are_you_21()
-        while age_check is None:
-            if age_check_value is not None:
-                if age_check_value is True:
-                    main_block.empty()
-                    age_check = True
-                else:
-                    main_block.empty()
-                    main_block.write(
-                        'Come back when you are 21 year of age or older.'
-                        )
-                    time.sleep(30)
-                    main_block.empty()
-                    age_check = None
-    while age_check is True:
-        main_block.empty()
+    if 'age_check' not in st.session_state.keys():
+        st.session_state['age_check'] = False
+    if st.session_state['age_check'] is False:
+        st.session_state['age_check'] = are_you_21.mj_app_age_check()
+    else:
         mj_app_display()
