@@ -37,11 +37,11 @@ def mj_app_display() -> None:
     from __return_cc_title__ import _return_cc_title
     import asyncio
     import daily_deals
-    import get_blog_pages
     import __image_carousel__
     import giveaway_form_capture
     import __add_pages_links__
     import __sm_links__
+    import get_video_to_display
     from __add_background_from_local__ import add_bg_from_local
     import shuffle_list
     # Hide mainmenu and footer
@@ -66,7 +66,7 @@ def mj_app_display() -> None:
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     carousel_container = st.container()
     st.markdown('<div><br><br></div>', unsafe_allow_html=True)
-    get_blog_pages.display_blogs_as_tabs()
+    e1, vid_col, e2 = st.columns([1.5, 2, 1.5])
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     with st.expander('Join our mailing list'):
         giveaway_form_capture._giveaway_form()
@@ -74,10 +74,18 @@ def mj_app_display() -> None:
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     __sm_links__._display_sm_links()
     __add_pages_links__._display_pages_links()
+    vid_bytes, vid_type = get_video_to_display._display_current_video()
+    with vid_col:
+        st.video(vid_bytes)
     with carousel_container:
         png_list = __image_carousel__._return_img_carousel_files()
         all_png_list = shuffle_list._check_for_list_cache_and_shuffle(png_list)
-        asyncio.run(__image_carousel__._return_image_carousel(all_png_list))
+        asyncio.run(
+            __image_carousel__._return_image_carousel(
+                all_png_list,
+                set_height=250
+            )
+        )
 
 
 if __name__ == '__main__':

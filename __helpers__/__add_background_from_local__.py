@@ -20,6 +20,7 @@ def add_bg_from_local(image_file):
         background-position: top;
         display: flex;
         color: white;
+        background-size: cover;
         background-repeat: no-repeat;
         filter: brightness(100%)
     }}
