@@ -13,7 +13,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 from st_clickable_images import clickable_images
 from pathlib import Path
-from random import shuffle
 
 
 def _return_url_bytes_str(file_path: str):
@@ -60,7 +59,8 @@ def _hide_loading_icon():
     st.markdown(hide_icon, unsafe_allow_html=True)
 
 
-async def _return_image_carousel(set_height=300) -> components:
+async def _return_image_carousel(all_png_list: list,
+                                 set_height=175) -> components:
     _hide_loading_icon()
     main_block, display_block = st.empty(), st.empty()
     try:
@@ -75,7 +75,7 @@ async def _return_image_carousel(set_height=300) -> components:
             "image-carousel-component",
             path="/home/dale/dale_working_folder/mj_app/lib/python3.11/site-packages/Streamlit-Image-Carousel/frontend/public"
             )
-    all_png_list = _return_img_carousel_files()
+    
     png_urls = _return_encoded_imgs_for_display(all_png_list)
     try:
         with display_block:

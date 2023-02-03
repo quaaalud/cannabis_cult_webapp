@@ -7,7 +7,6 @@ Created on Sun Jan  1 18:31:44 2023
 """
 
 import streamlit as st
-import time
 import sys
 from pathlib import Path
 
@@ -44,6 +43,7 @@ def mj_app_display() -> None:
     import __add_pages_links__
     import __sm_links__
     from __add_background_from_local__ import add_bg_from_local
+    import shuffle_list
     # Hide mainmenu and footer
     hide_streamlit_style = """
                 <style>
@@ -75,7 +75,9 @@ def mj_app_display() -> None:
     __sm_links__._display_sm_links()
     __add_pages_links__._display_pages_links()
     with carousel_container:
-        asyncio.run(__image_carousel__._return_image_carousel())
+        png_list = __image_carousel__._return_img_carousel_files()
+        all_png_list = shuffle_list._check_for_list_cache_and_shuffle(png_list)
+        asyncio.run(__image_carousel__._return_image_carousel(all_png_list))
 
 
 if __name__ == '__main__':
