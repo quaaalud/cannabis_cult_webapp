@@ -59,7 +59,10 @@ def mj_app_display() -> None:
         )
     add_bg_from_local(GIVEAWAY_BG_PATH)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    e1, logo_col, e2 = st.columns([3, 3, 3])
+    # import and shuffle list on the first run only
+    png_list = __image_carousel__._return_img_carousel_files()
+    all_png_list = shuffle_list._check_for_list_cache_and_shuffle(png_list)
+    e1, logo_col, e2 = st.columns([4, 3, 4])
     with logo_col:
         _return_cc_title()
     daily_deals.display_daily_deals()
@@ -78,8 +81,6 @@ def mj_app_display() -> None:
     with vid_col:
         st.video(vid_bytes)
     with carousel_container:
-        png_list = __image_carousel__._return_img_carousel_files()
-        all_png_list = shuffle_list._check_for_list_cache_and_shuffle(png_list)
         asyncio.run(
             __image_carousel__._return_image_carousel(
                 all_png_list,

@@ -53,69 +53,52 @@ def _get_deal_workbook_and_return_dict() -> dict:
 
 def display_daily_deals() -> None:
     deals_dict = _get_deal_workbook_and_return_dict()
-    col1, col2, col3 = st.columns([3, 3, 3])
+    col1, col2 = st.columns([4, 4])
     for i, (co_name, co_info) in enumerate(deals_dict.items()):
         lbl_list = []
         for lbl, info in co_info.items():
-            lbl_str = f'{lbl}: {info}'
+            lbl_str = f'{info}'
             lbl_list.append(lbl_str)
-        if (i % 3) == 0:
+        if (i % 2) == 0:
             col2.markdown(
                 f"""
-                <h2 style="text-align: center">
+                <h1 style="text-align: center">
                 {co_name}
-                </h2>""",
+                </h1>""",
                 unsafe_allow_html=True,
                 )
             for lbl in lbl_list:
                 col2.markdown(
                     f"""
                     <div style="text-align: center">
-                    <h4>
+                    <h3>
                     {lbl}
-                    </h4>
+                    </h3>
                     </div>
                     """,
                     unsafe_allow_html=True,
                     )
-        elif (i % 3) == 1:
+            col2.markdown('<br><br>', unsafe_allow_html=True)
+        elif (i % 2) == 1:
             col1.markdown(
                 f"""
-                <h2 style="text-align: center">
+                <h1 style="text-align: center">
                 {co_name}
-                </h2>""",
+                </h1>""",
                 unsafe_allow_html=True,
                 )
             for lbl in lbl_list:
                 col1.markdown(
                     f"""
                     <div style="text-align: center">
-                    <h4>
+                    <h3>
                     {lbl}
-                    </h4>
+                    </h3>
                     </div>
                     """,
                     unsafe_allow_html=True,
                     )
-        elif (i % 3) == 2:
-            col3.markdown(
-                f"""
-                <h2 style="text-align: center">
-                {co_name}
-                </h2>""",
-                unsafe_allow_html=True,
-                )
-            for lbl in lbl_list:
-                col3.markdown(
-                    f"""
-                    <div style="text-align: center">
-                    <h4>
-                    {lbl}
-                    </h4>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                    )
+            col1.markdown('<br><br>', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
