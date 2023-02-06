@@ -62,7 +62,8 @@ def _hide_loading_icon():
 async def _return_image_carousel(all_png_list: list,
                                  set_height=175) -> components:
     _hide_loading_icon()
-    main_block, display_block = st.empty(), st.empty()
+    main_block = st.empty()
+    display_block = st.empty()
     try:
         lib_dir = Path(
             'lib/python3.11/site-packages/Streamlit-Image-Carousel/frontend/public')
@@ -83,6 +84,7 @@ async def _return_image_carousel(all_png_list: list,
                 imageUrls=png_urls,
                 height=set_height
                 )
+        display_block.empty()
         with main_block:
             selected_index = _return_index_of_list_item(png_urls,
                                                         selected_image

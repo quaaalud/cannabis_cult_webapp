@@ -37,6 +37,7 @@ def _get_company_info_dict(vals_array: array) -> dict:
         'Address': vals_array[0][1],
         'Try This': vals_array[0][2],
         'Specials': vals_array[0][3],
+        'Image': vals_array[0][4],
         }
 
 
@@ -56,16 +57,6 @@ def display_daily_deals() -> None:
     deals_dict = _get_deal_workbook_and_return_dict()
     deals_container = st.container()
     with deals_container:
-        st.markdown(
-            """
-            <style>
-            .dispensaryData {
-            font-family: taurunum-ferrum-iron, sans-serif;
-            font-style: normal;
-            </style>
-            """,
-            unsafe_allow_html=True
-            )
         col1, col2 = st.columns([4, 4])
         for i, (co_name, co_info) in enumerate(deals_dict.items()):
             lbl_list = []
@@ -83,16 +74,22 @@ def display_daily_deals() -> None:
                     unsafe_allow_html=True,
                     )
                 for lbl in lbl_list:
-                    col2.markdown(
-                        f"""
-                        <h3 style="text-align: center; 
-                        font-family: taurunum-ferrum-iron, sans-serif;
-                        font-style: normal";>
-                        {lbl}
-                        </h3>
-                        """,
-                        unsafe_allow_html=True,
-                        )
+                    if lbl.startswith('https:'):
+                        col2.image(
+                            f'{lbl}',
+                            use_column_width='always',
+                            )
+                    else:
+                        col2.markdown(
+                            f"""
+                            <h3 style="text-align: center; 
+                            font-family: taurunum-ferrum-iron, sans-serif;
+                            font-style: normal";>
+                            {lbl}
+                            </h3>
+                            """,
+                            unsafe_allow_html=True,
+                            )
                 col2.markdown('<br><br>', unsafe_allow_html=True)
             elif (i % 2) == 1:
                 col1.markdown(
@@ -105,16 +102,22 @@ def display_daily_deals() -> None:
                     unsafe_allow_html=True,
                     )
                 for lbl in lbl_list:
-                    col1.markdown(
-                        f"""
-                        <h3 style="text-align: center; 
-                        font-family: taurunum-ferrum-iron, sans-serif;
-                        font-style: normal";>
-                        {lbl}
-                        </h3>
-                        """,
-                        unsafe_allow_html=True,
-                        )
+                    if lbl.startswith('https:'):
+                        col1.image(
+                            f'{lbl}',
+                            use_column_width='always',
+                            )
+                    else:
+                        col1.markdown(
+                            f"""
+                            <h3 style="text-align: center; 
+                            font-family: taurunum-ferrum-iron, sans-serif;
+                            font-style: normal";>
+                            {lbl}
+                            </h3>
+                            """,
+                            unsafe_allow_html=True,
+                            )
                 col1.markdown('<br><br>', unsafe_allow_html=True)
 
 
