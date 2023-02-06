@@ -6,18 +6,8 @@ Created on Sun Jan  1 19:42:09 2023
 @author: dludwinski
 """
 
-import time
 import streamlit as st
 import datetime as dt
-
-
-def _get_21_disclaimer_text() -> str:
-    return """Potential customers should be reminded that the possession, distribution,
-    and cultivation of cannabis is still prohibited under US federal law.
-    Medical decisions should not be based on advertising.
-    Consult a physician of the benefits and risks of of particular medical
-    marijuana products.
-    """
 
 
 def get_date_str_21_years_ago() -> str:
@@ -68,10 +58,17 @@ def are_you_21() -> bool:
     no_button = col2.button('No', key='NO-KEY')
     e1, disclaim_col, e2 = st.columns([2.5, 7, 2.5])
     disclaim_col.markdown(
-        f"""<section>
+        """<div>
         <h4 style="text-align:center">
-        <small><small>
-        {_get_21_disclaimer_text()}""", 
+        <small>
+        Potential visitors should be reminded that the possession, distribution,
+        and cultivation of cannabis is still prohibited under US federal law.
+        Medical decisions should not be based on advertising.
+        Consult a physician of the benefits and risks of of particular medical
+        marijuana products.
+        </small>
+        </h4>
+        </div>""", 
         unsafe_allow_html=True
         )
     if no_button:
@@ -91,21 +88,19 @@ def mj_app_age_check() -> bool:
     None.
 
     """
-    head_block = st.container()
+    from __add_background_from_local__ import add_bg_from_local
+    from pathlib import Path
+    brain_no_bg_path = Path(
+        Path(__file__).parent, 
+        '.data', 'cc_logos', 'cc_brain_nobg.png'
+        )
+    add_bg_from_local(brain_no_bg_path)
     main_block = st.container()
     with main_block:
         age_result = are_you_21()
     if age_result is False:
-        main_block.empty()
-        head_block.subheader('Come back with someone over the age of 21')
-        time.sleep(30)
-        head_block.empty()
         return False
     elif age_result is True:
-        main_block.empty()
-        head_block.subheader('Welcome to the Cannabis Cult!')
-        time.sleep(2.5)
-        head_block.write('')
         return True
 
 
