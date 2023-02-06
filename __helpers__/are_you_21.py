@@ -11,6 +11,15 @@ import streamlit as st
 import datetime as dt
 
 
+def _get_21_disclaimer_text() -> str:
+    return """Potential customers should be reminded that the possession, distribution,
+    and cultivation of cannabis is still prohibited under US federal law.
+    Medical decisions should not be based on advertising.
+    Consult a physician of the benefits and risks of of particular medical
+    marijuana products.
+    """
+
+
 def get_date_str_21_years_ago() -> str:
     """
     Get date from 21 years prior to the current date.
@@ -35,12 +44,36 @@ def are_you_21() -> bool:
 
     Retruns True if user selects Yes and False if user selects No
     """
+    hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                div.block-container
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     display_txt = f'Were you born on or before {get_date_str_21_years_ago()}?'
-    col1, col2, col3 = st.columns([3, 2.5, 3])
-    col2.write(display_txt)
-    e1, col1, col2, e2 = st.columns([5, 1, 1, 5])
+    col1, col2, col3 = st.columns([1.5, 9, 1.5])
+    col2.markdown(
+        f"""
+        <section>
+        <h2 style="color:#301934; text-align:center">
+        {display_txt}
+        </h2>
+        </section>""", 
+        unsafe_allow_html=True
+        )
+    e1, col1, col2, e2 = st.columns([5.5, 1, 1, 5.5])
     yes_button = col1.button('Yes', key='YES-KEY')
     no_button = col2.button('No', key='NO-KEY')
+    e1, disclaim_col, e2 = st.columns([2.5, 7, 2.5])
+    disclaim_col.markdown(
+        f"""<section>
+        <h4 style="text-align:center">
+        <small><small>
+        {_get_21_disclaimer_text()}""", 
+        unsafe_allow_html=True
+        )
     if no_button:
         return False
     if yes_button:

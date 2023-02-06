@@ -90,9 +90,14 @@ def mj_app_display() -> None:
 
 
 if __name__ == '__main__':
+    icon_path = Path(
+        Path(__file__).parent, '__helpers__', '.data', 'png', 'cannabis_cult_logo.png'
+        )
+    import __get_image_to_display__ as get_image
     st.set_page_config(
         layout='wide',
         page_title='The Cannabis Cult',
+        page_icon=get_image.return_image_from_path(icon_path),
         menu_items=None,
         initial_sidebar_state='collapsed',
     )
