@@ -41,7 +41,8 @@ def _get_company_info_dict(vals_array: array) -> dict:
 
 
 def _get_deal_workbook_and_return_dict() -> dict:
-    deals_df = get_gsheet.pandas_read_google_sheet()
+    deals_gsheet = get_gsheet.pandas_read_google_sheet()
+    deals_df = deals_gsheet.copy().fillna(' ')
     co_names_list = _get_all_company_names(deals_df)
     deals_dict = {}
     for co in co_names_list:
@@ -53,52 +54,68 @@ def _get_deal_workbook_and_return_dict() -> dict:
 
 def display_daily_deals() -> None:
     deals_dict = _get_deal_workbook_and_return_dict()
-    col1, col2 = st.columns([4, 4])
-    for i, (co_name, co_info) in enumerate(deals_dict.items()):
-        lbl_list = []
-        for lbl, info in co_info.items():
-            lbl_str = f'{info}'
-            lbl_list.append(lbl_str)
-        if (i % 2) == 0:
-            col2.markdown(
-                f"""
-                <h1 style="text-align: center">
-                {co_name}
-                </h1>""",
-                unsafe_allow_html=True,
-                )
-            for lbl in lbl_list:
+    deals_container = st.container()
+    with deals_container:
+        st.markdown(
+            """
+            <style>
+            .dispensaryData {
+            font-family: taurunum-ferrum-iron, sans-serif;
+            font-style: normal;
+            </style>
+            """,
+            unsafe_allow_html=True
+            )
+        col1, col2 = st.columns([4, 4])
+        for i, (co_name, co_info) in enumerate(deals_dict.items()):
+            lbl_list = []
+            for lbl, info in co_info.items():
+                lbl_str = f'{info}'
+                lbl_list.append(lbl_str)
+            if (i % 2) == 0:
                 col2.markdown(
                     f"""
-                    <div style="text-align: center">
-                    <h3>
-                    {lbl}
-                    </h3>
-                    </div>
-                    """,
+                    <h1 style="text-align: center; 
+                    font-family: taurunum-ferrum-iron, sans-serif;
+                    font-style: normal";>
+                    {co_name}
+                    </h1>""",
                     unsafe_allow_html=True,
                     )
-            col2.markdown('<br><br>', unsafe_allow_html=True)
-        elif (i % 2) == 1:
-            col1.markdown(
-                f"""
-                <h1 style="text-align: center">
-                {co_name}
-                </h1>""",
-                unsafe_allow_html=True,
-                )
-            for lbl in lbl_list:
+                for lbl in lbl_list:
+                    col2.markdown(
+                        f"""
+                        <h3 style="text-align: center; 
+                        font-family: taurunum-ferrum-iron, sans-serif;
+                        font-style: normal";>
+                        {lbl}
+                        </h3>
+                        """,
+                        unsafe_allow_html=True,
+                        )
+                col2.markdown('<br><br>', unsafe_allow_html=True)
+            elif (i % 2) == 1:
                 col1.markdown(
                     f"""
-                    <div style="text-align: center">
-                    <h3>
-                    {lbl}
-                    </h3>
-                    </div>
-                    """,
+                    <h1 style="text-align: center; 
+                    font-family: taurunum-ferrum-iron, sans-serif;
+                    font-style: normal";>
+                    {co_name}
+                    </h1>""",
                     unsafe_allow_html=True,
                     )
-            col1.markdown('<br><br>', unsafe_allow_html=True)
+                for lbl in lbl_list:
+                    col1.markdown(
+                        f"""
+                        <h3 style="text-align: center; 
+                        font-family: taurunum-ferrum-iron, sans-serif;
+                        font-style: normal";>
+                        {lbl}
+                        </h3>
+                        """,
+                        unsafe_allow_html=True,
+                        )
+                col1.markdown('<br><br>', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
