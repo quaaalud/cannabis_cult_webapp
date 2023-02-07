@@ -180,8 +180,8 @@ def _giveaway_form():
                     """
                 <h3 style="text-align:center">
                 Your submission has been recorded.<br><br>
-                Check your email regularly to see if you have won,<br><br>
-                We have lots surprises in store for Cult Members coming soon!
+                Check your email regularly to see what The Cult is doing<br>
+                <br>Updates for Cult Members coming soon!
                 </h3>
                 """,
                     unsafe_allow_html=True,
@@ -192,6 +192,6 @@ def _giveaway_form():
                     """
                     <h3 style="text-align: center;">
                     You must be at least 21 years old &<br>
-                    legal resident of Missouri or Illinois to Enter
+                    to subscribe to our mailing list.
                     """
                 )
