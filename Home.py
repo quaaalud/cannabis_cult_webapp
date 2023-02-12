@@ -76,7 +76,7 @@ def mj_app_display() -> None:
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     daily_deals.display_daily_deals()
     shopify_container = st.empty()
-    with st.expander('Join our mailing list', expanded=True):
+    with st.expander('Join our mailing list', expanded=False):
         giveaway_form_capture._giveaway_form()
         st.markdown(_get_disclaimer_text(), unsafe_allow_html=True)
     st.markdown('<div><br></div>', unsafe_allow_html=True)
