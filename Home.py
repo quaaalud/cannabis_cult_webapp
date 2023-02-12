@@ -67,11 +67,10 @@ def mj_app_display() -> None:
     with logo_col:
         _return_cc_title()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
-    shopify_container = st.empty()
     carousel_container = st.container()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     daily_deals.display_daily_deals()
-    st.markdown('<div><br><br></div>', unsafe_allow_html=True)
+    shopify_container = st.empty()
     with st.expander('Join our mailing list', expanded=True):
         giveaway_form_capture._giveaway_form()
         st.markdown(_get_disclaimer_text(), unsafe_allow_html=True)

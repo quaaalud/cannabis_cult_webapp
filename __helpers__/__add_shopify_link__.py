@@ -29,8 +29,8 @@ def _add_shopify_merch_link() -> str:
     """
     shopify_container = st.container()
     with shopify_container:
-        st.markdown(html_str, unsafe_allow_html=True)
         st.markdown(
             _clickable_image_without_caption(shopify_link, shopify_img),
             unsafe_allow_html=True,
         )
+        st.markdown(html_str, unsafe_allow_html=True)

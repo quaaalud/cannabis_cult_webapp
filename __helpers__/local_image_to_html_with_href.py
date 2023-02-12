@@ -31,16 +31,16 @@ def _clickable_image_without_caption(web_path: str, img_path: str) -> str:
     try:
         img_html = f"""
         <div style="text-align: center;">
-        <a href='{web_path}'>
-        <img src='data:image/png;base64,{_img_to_bytes(img_path)}'>
+        <a href="{web_path}">
+        <img src="data:image/png;base64,{_img_to_bytes(img_path)}">
         </a>
         </div>
         """
     except:
         img_html = f"""
         <div style="text-align:center;">
-        <a href='{web_path}'>
-        <img src='data:image/jpg;base64,{_img_to_bytes(img_path)}'>
+        <a href="{web_path}">
+        <img src="data:image/jpg;base64,{_img_to_bytes(img_path)}">
         </a>
         </div>
         """
