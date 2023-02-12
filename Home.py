@@ -43,6 +43,7 @@ def mj_app_display() -> None:
     import __sm_links__
     import get_video_to_display
     import __add_shopify_link__
+    from __add_giveaway_form__ import _contest_giveaway_form
     from __add_background_from_local__ import add_bg_from_local
     import shuffle_list
     # Hide mainmenu and footer
@@ -67,6 +68,10 @@ def mj_app_display() -> None:
     with logo_col:
         _return_cc_title()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
+    with st.expander(
+            'ENTER THE CURRENT GIVEAWAY AND GET TO KNOW OUR PARTNERS',
+            expanded=True):
+        _contest_giveaway_form()
     carousel_container = st.container()
     st.markdown('<div><br></div>', unsafe_allow_html=True)
     daily_deals.display_daily_deals()

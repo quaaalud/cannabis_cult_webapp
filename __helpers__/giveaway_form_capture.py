@@ -77,23 +77,25 @@ def _get_entries_workbook():
     return entry_wbook
 
 
-def _get_local_workbook():
+def _get_local_workbook(wbook_name='giveaway_entries_workbook'):
     global ENTRIES_DIR
     ENTRIES_DIR.mkdir(exist_ok=True)
     try:
         return pd.read_csv(
-            str(Path(ENTRIES_DIR, 'giveaway_entries_workbook.csv'))
+            str(Path(ENTRIES_DIR, '{wbook_name}.csv'))
             )
     except FileNotFoundError:
         col_list = ['name', 'email', 'phone', 'zip', 'date']
         return pd.DataFrame(columns=col_list)
 
 
-def _add_new_entry_to_wbook(df: pd.DataFrame) -> pd.DataFrame:
+def _add_new_entry_to_wbook(df: pd.DataFrame,
+                            wbook_name='giveaway_entries_workbook'
+                            ) -> pd.DataFrame:
     global DOCS_URL, ENTRIES_DIR
     entry_wbook = _get_entries_workbook()
     emails = entry_wbook['email'].unique()
-    local_workbook = _get_local_workbook()
+    local_workbook = _get_local_workbook(wbook_name=wbook_name)
     local_emails = local_workbook['email'].unique()
     temp_df = pd.concat([local_workbook, entry_wbook], axis=0)
     if [df['email'].unique()][0] not in emails and [
@@ -106,7 +108,7 @@ def _add_new_entry_to_wbook(df: pd.DataFrame) -> pd.DataFrame:
         new_df = temp_df.copy()
     new_df.to_csv(DOCS_URL, index=False)
     new_df.to_csv(
-        str(Path(ENTRIES_DIR, 'giveaway_entries_workbook.csv')),
+        str(Path(ENTRIES_DIR, f'{wbook_name}.csv')),
         index=False
         )
     return len(new_df)
@@ -125,7 +127,7 @@ def _subscribe_disclaimer() -> str:
 
 
 @st.experimental_singleton(experimental_allow_widgets=True)
-def _giveaway_form():
+def _giveaway_form(wbook_name='giveaway_entries_workbook'):
     main_block = st.empty()
     with main_block:
         with st.form('giveaway_form'):
@@ -186,7 +188,7 @@ def _giveaway_form():
                 """,
                     unsafe_allow_html=True,
                 )
-                _add_new_entry_to_wbook(data)
+                _add_new_entry_to_wbook(data, wbook_name=wbook_name)
             else:
                 main_block.subheader(
                     """
